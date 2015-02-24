@@ -1,0 +1,10 @@
+
+.required-field input:after {
+    content: "*";
+    font-weight: bold;
+    color: red;
+}
+
+.required-field input{
+	background-color: aqua
+}
