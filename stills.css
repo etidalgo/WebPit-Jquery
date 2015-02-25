@@ -1,4 +1,4 @@
-
+// Add * after label for required field
 .required-field label:after {
     content: ' *';
     font-weight: bold;

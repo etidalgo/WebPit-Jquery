@@ -26,15 +26,20 @@
 	$(document).ready(
 		function() { 
 			$(".datepicker").datepicker();
-			$("#milestone").on(
+			$("#parentsMilestone").hide();
+			$("#milestone input").on(
 				"change",
 				{ },
 				function( eventObject ) {
 					// console.log("Date changed");
-					eventObject.target.value;
+					// var milestone = $.datepicker.parseDate("mm/dd/yyyy", eventObject.target.value);
+					var milestone = new Date(eventObject.target.value);
+					if ( calculateAge(milestone) < 16 ) {
+						$("#parentsMilestone").show();
+					}
 				});
 
-			$("#password").on(
+			$("#password input").on(
 				"change",
 				{ prop: "value" },
 				function( eventObject ) {
@@ -51,38 +56,44 @@
 			<table border="1" cellpadding="5">
 				<!-- ...in a big HTML table. -->
 				<tr>
-					<td class="required" >
+					<td id="username" class="required" >
 						<label for="username">Username:</label><br />
 						<input type="text" name="username" id="username" size="15" />
 					</td>
 				</tr>
 				<tr>
-					<td class="required">
+					<td id="password" class="required">
 						<label for="password">Password:</label><br />
-						<input type="password" name="password" id="password" size="15" />
+						<input type="password" name="password" size="15" />
 					</td>
 				</tr>
 				<tr>
-					<td class="required">
+					<td id="milestone" class="required">
 						<label for="milestone">Milestone Date:</label><br />
-						<input class="datepicker" type="text" name="milestone" id="milestone" />
+						<input class="datepicker" type="text" name="milestone" />
 					</td>
 				</tr>				
 				<tr>
-					<td>
+					<td id="parentsMilestone" class="field" >
+						<label for="parentsMilestoneField">Parent's Milestone Date:</label><br />
+						<input class="datepicker" type="text" name="parentsMilestoneField" id="milestone" />
+					</td>
+				</tr>				
+				<tr>
+					<td id="comments" class="field" >
 					<label for="comments">TextArea Comment:</label><br />
-						<textarea cols="40" name="comments" id="comments" rows="6">Comments...</textarea>
+						<textarea cols="40" name="comments" rows="6">Comments...</textarea>
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td id="filename" class="field" >
 						<label for="filename">Filename:</label><br />
-						<input type="file" name="filename" id="filename" size="35" />
+						<input type="file" name="filename" size="35" />
 						<input type="hidden" name="hiddenField" id="hiddenField" value="Hidden Field Value" />
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td id="checkboxes" class="field" >
 						Checkbox Items:<br />
 						<input type="checkbox" name="checkboxes[]" value="cb1" />Checkbox 1 
 						<input type="checkbox" name="checkboxes[]" value="cb2" />Checkbox 2 
@@ -90,7 +101,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td id="radioboxes" class="field" >
 						Radio Items:<br />
 						<input type="radio" name="radioval" id="radioval1" value="rd1" />radio 1
 						<input type="radio" name="radioval" id="radioval2" value="rd2" checked="checked" />radio 2 
@@ -98,51 +109,31 @@
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td id="multipleselect" class="field" >
 						<label for="multipleselect">Multiple Select Values</label><br />
-						<select id="multipleselect" multiple="multiple" name="multipleselect[]" size="4">
-							<option value="ms1">
-                Selection Item 1
-							</option>
-							<option value="ms2">
-                Selection Item 2
-							</option>
-							<option value="ms3">
-                Selection Item 3
-							</option>
-							<option value="ms4" selected="selected">
-                Selection Item 4
-							</option>
+						<select multiple="multiple" name="multipleselect[]" size="4">
+							<option value="ms1">Selection Item 1</option>
+							<option value="ms2">Selection Item 2</option>
+							<option value="ms3">Selection Item 3</option>
+							<option value="ms4" selected="selected">Selection Item 4</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td id="dropdown" class="field" >
 						<label for="dropdown">Dropdown:</label><br />
-						<select name="dropdown" id="dropdown">
-							<option value="dd1">
-                Drop Down Item 1
-							</option>
-							<option value="dd2">
-                Drop Down Item 2
-							</option>
-							<option value="dd3" selected="selected">
-                Drop Down Item 3
-							</option>
-							<option value="dd4">
-                Drop Down Item 4
-							</option>
-							<option value="dd5">
-                Drop Down Item 5
-							</option>
-							<option value="dd6">
-                Drop Down Item 6
-							</option>
+						<select name="dropdown" >
+							<option value="dd1">Drop Down Item 1</option>
+							<option value="dd2">Drop Down Item 2</option>
+							<option value="dd3" selected="selected">Drop Down Item 3</option>
+							<option value="dd4">Drop Down Item 4</option>
+							<option value="dd5">Drop Down Item 5</option>
+							<option value="dd6">Drop Down Item 6</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td class="field" >
 						More stuff to wade through<br />
 
 					</td>
