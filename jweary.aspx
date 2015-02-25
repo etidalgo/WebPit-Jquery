@@ -22,11 +22,15 @@
 		});
 		return isValidate;
 	}
+	
+	function previewForm() {
+		var something = "nothing";
+	}
 
 	$(document).ready(
 		function() { 
 			$(".datepicker").datepicker();
-			$("#parentsMilestone").hide();
+			$("#previousMilestone").hide();
 			$("#milestone input").on(
 				"change",
 				{ },
@@ -34,8 +38,8 @@
 					// console.log("Date changed");
 					// var milestone = $.datepicker.parseDate("mm/dd/yyyy", eventObject.target.value);
 					var milestone = new Date(eventObject.target.value);
-					if ( calculateAge(milestone) < 16 ) {
-						$("#parentsMilestone").show();
+					if ( calculateDays(milestone) < 40 ) { // number days
+						$("#previousMilestone").show();
 					}
 				});
 
@@ -74,9 +78,9 @@
 					</td>
 				</tr>				
 				<tr>
-					<td id="parentsMilestone" class="field" >
-						<label for="parentsMilestoneField">Parent's Milestone Date:</label><br />
-						<input class="datepicker" type="text" name="parentsMilestoneField" id="milestone" />
+					<td id="previousMilestone" class="field" >
+						<label for="previousMilestoneField">Previous Milestone Date:</label><br />
+						<input class="datepicker" type="text" name="previousMilestoneField" id="milestone" />
 					</td>
 				</tr>				
 				<tr>
@@ -142,6 +146,7 @@
 					<td>
 						<input type="reset" name="submitbutton" value="cancel" /> 
 						<input class="submit" type="submit" name="submitbutton" value="submit" />
+						<input type="button" value="preview" onClick="return previewForm()" />
 					</td>
 				</tr>
 			</table>

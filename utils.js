@@ -11,3 +11,7 @@ function CheckPasswordRequirements( password ) {
    return Math.abs(ageDate.getUTCFullYear() - 1970);
  }
  
+ function calculateDays(thatday) {
+	 // Date.parse(str1)
+	return  Math.floor(( Date.now() - thatday ) / 86400000);	 
+ }
