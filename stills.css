@@ -1,8 +1,9 @@
 
-.required-field input:after {
-    content: "*";
+.required-field label:after {
+    content: ' *';
     font-weight: bold;
     color: red;
+	display: inline;
 }
 
 .required-field input{

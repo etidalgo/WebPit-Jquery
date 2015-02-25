@@ -31,6 +31,7 @@
 				{ },
 				function( eventObject ) {
 					// console.log("Date changed");
+					eventObject.target.value;
 				});
 
 			$("#password").on(
@@ -140,6 +141,12 @@
 						</select>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						More stuff to wade through<br />
+
+					</td>
+				</tr>				
 				<tr>
 					<td>
 						<input type="reset" name="submitbutton" value="cancel" /> 
