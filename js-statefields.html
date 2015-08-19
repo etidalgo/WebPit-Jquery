@@ -1,0 +1,88 @@
+<html>
+<head>
+
+		<title>Test how to autogenerate hidden form fields to persist object ids</title>
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		 
+<script type="text/javascript" >
+    function SaveWithAction( action, status ) {
+        $('#hdnApplicationAction').val(action);
+        $('#hdnApplicationStatus').val(status.toString());
+        // MainForm_onsubmit();
+    }
+function ProcessPage() {
+    // This duplicates some table knowledge.
+    // Todo: Collapse into single location
+    var appStatus = parseInt($("#hdnApplicationStatus").val());
+    $("#Btn_ResetApplication").click(function() { SaveWithAction("Created", 0); ProcessPage();});
+
+    switch( appStatus ) {
+        case 0: // created
+            $("#Btn_ResetApplication").hide();
+            $("#Btn_NextAction").show();
+            $("#Btn_NextAction").click(function() { SaveWithAction("In Progress", 20); ProcessPage();});
+            break;
+
+        case 20: // in progress
+            $("#Btn_ResetApplication").show();
+            $("#Btn_NextAction").show();
+            $("#Btn_NextAction").click(function() { SaveWithAction("Pre-Approved", 40);  ProcessPage();});
+            break;
+
+        case 40: // pre-approved
+            $("#Btn_ResetApplication").show();
+            $("#Btn_NextAction").show();
+            $("#Btn_NextAction").click(function() { SaveWithAction("Approval Pending", 60);  ProcessPage();});
+            break;
+
+        case 60: //approval pending
+            $("#Btn_ResetApplication").show();
+            $("#Btn_NextAction").show();
+            $("#Btn_NextAction").click(function() { SaveWithAction("Conditionally Approved", 80);  ProcessPage();});
+            break;
+
+        case 80: // conditionally approved
+
+            $("#Btn_NextAction").click(function() { SaveWithAction("Approved", 100);  ProcessPage();});
+            break;
+
+        case 100: // approved
+            $("#Btn_ResetApplication").show();
+            $("#Btn_NextAction").hide();
+            break;
+
+        default :
+            // notify of problem
+            break;
+
+    }
+}
+
+
+</script>		 
+</head>
+<body>
+<input type="text" id="hdnApplicationAction" name="hdnApplicationAction" />
+<input type="text" id="hdnApplicationStatus" name="hdnApplicationStatus" value="20"/>
+<input type="text" id="hdnUserId" name="hdnUserId" />
+
+
+<!-- LenderOnly -->
+    <label >App Status</label>
+    <div class="AppFormDataInput">
+        <button type="button" tabindex="1" class="btn btn_sml tooltipster lenderAction" name="Btn_ResetApplication" id="Btn_ResetApplication" value="Reset Application" style="float:left" title="Click this button will reset the application. This is irreversibleble.">
+            Reset
+        </button>
+        <input type="text" class="SizeSmall readonly" readonly="readonly" id="ApplicationStatus" name="ApplicationStatus" value="alpha" />
+    </div>
+
+    <div class="AppFormDataInput">
+        <button type="button" tabindex="1" class="btn btn_sml tooltipster lenderAction" name="Btn_NextAction" id="Btn_NextAction" value="Next Action" style="float:left" title="Replace this title">
+            Next step
+        </button>
+    </div>    
+</body>
+<script type="text/javascript" >
+ProcessPage();
+</script>
+</html>

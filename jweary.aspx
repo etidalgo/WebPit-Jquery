@@ -18,6 +18,8 @@
 			if (input.val().length == 0) {
 				$(this).addClass("required-field");
 				isValidate = false;
+			} else {
+				$(this).removeClass("required-field");
 			}
 		});
 		return isValidate;
@@ -31,6 +33,7 @@
 		function() { 
 			$(".datepicker").datepicker();
 			$("#previousMilestone").hide();
+			
 			$("#milestone input").on(
 				"change",
 				{ },
